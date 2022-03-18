@@ -2,9 +2,9 @@
 using Discord.Net;
 using Discord.WebSocket;
 using Newtonsoft.Json;
-using sancus;
 using System;
 using System.IO;
+using Bot;
 
 namespace Bot
 {
