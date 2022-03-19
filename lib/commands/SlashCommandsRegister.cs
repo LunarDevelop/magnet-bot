@@ -1,5 +1,6 @@
 using Discord;
 using Discord.Net;
+using Discord.WebSocket;
 using Newtonsoft.Json;
 
 namespace Bot.Commands
@@ -8,13 +9,16 @@ namespace Bot.Commands
     {
         List<SlashCommandBuilder> CmdList = new List<SlashCommandBuilder>();
 
-        
-        SlashCommandBuilder SayCmd = new SlashCommandBuilder()
-            .WithName("Say")
-            .WithDescription("Get the" + Program.client.CurrentUser.Username +"to say something in this channel.");
 
-        public async Task SlashRegisterAsync()
+        public async Task SlashRegisterAsync(DiscordSocketClient client)
         {
+
+            // Say Command
+            SlashCommandBuilder SayCmd = new SlashCommandBuilder()
+            .WithName("say")
+            .WithDescription("Get the" + client.CurrentUser.Username + "to say something in this channel.");
+
+
             CmdList.Add(SayCmd);
 
             // Register Commands
@@ -23,7 +27,9 @@ namespace Bot.Commands
                 // Now that we have our builder, we can call the CreateApplicationCommandAsync method to make our slash command.
                 foreach (SlashCommandBuilder cmd in CmdList)
                 {
-                    await Program.test_guild.CreateApplicationCommandAsync(cmd.Build());
+                    await client.GetGuild(
+                        Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")))
+                        .CreateApplicationCommandAsync(cmd.Build());
                 }
 
             }
