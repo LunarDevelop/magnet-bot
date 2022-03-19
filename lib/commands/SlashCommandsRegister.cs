@@ -1,11 +1,8 @@
 using Discord;
 using Discord.Net;
-using Discord.WebSocket;
-
-using Bot;
 using Newtonsoft.Json;
 
-namespace Bot.lib.commands
+namespace Bot.Commands
 {
     public class SlashCommandsRegister
     {
@@ -15,7 +12,7 @@ namespace Bot.lib.commands
         SlashCommandBuilder SayCmd = new SlashCommandBuilder()
             .WithName("Say")
             .WithDescription("Get the" + Program.client.CurrentUser.Username +"to say something in this channel.");
-            
+
         public async Task SlashRegisterAsync()
         {
             CmdList.Add(SayCmd);
