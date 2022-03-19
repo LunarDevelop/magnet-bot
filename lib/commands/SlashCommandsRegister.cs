@@ -18,8 +18,26 @@ namespace Bot.Commands
             .WithName("say")
             .WithDescription("Get the" + client.CurrentUser.Username + "to say something in this channel.");
 
-
             CmdList.Add(SayCmd);
+
+            // Role Commands
+            SlashCommandBuilder RoleCmd = new SlashCommandBuilder()
+                .WithName("role")
+                .WithDescription("Commands to help with some role assignments")
+                .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("add")
+                        .WithDescription("Add a role to a user")
+                        .WithType(ApplicationCommandOptionType.SubCommand)
+                        .AddOption("user", ApplicationCommandOptionType.User, "The user to add a role to", isRequired: true)
+                        .AddOption("role", ApplicationCommandOptionType.Role, "The role to add to the user", isRequired: true))
+                .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("remove")
+                        .WithDescription("Remove a role from a user")
+                        .WithType(ApplicationCommandOptionType.SubCommand)
+                        .AddOption("user", ApplicationCommandOptionType.User, "The user you want to remove a role from", isRequired: true)
+                        .AddOption("role", ApplicationCommandOptionType.Role, "The role to remove", isRequired: true));
+
+            CmdList.Add(RoleCmd);
 
             // Register Commands
             try
