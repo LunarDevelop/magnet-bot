@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "epkpiOTZjnCZGipl+fsTAWFCpIzsrlWZ128zk/sFyLOy4iaecQpJEBOwFBhW4yrevl36pQFwkZ9i0nLKfRIHpw==",
+  "dgSpecHash": "qgZ5g5bUML+y7VAsXhPt/XuLKpkZ5EBc6CT93/R1my10i9ZlCkiIPXp4N963a3P5uvF+Tl81ygztxw5Sh6e/Yw==",
   "success": true,
-  "projectFilePath": "D:\\CODE\\magnet-bot\\magnet-bot.csproj",
+  "projectFilePath": "F:\\C#\\discord\\magnet\\Commands\\magnet-bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bmaca\\.nuget\\packages\\discord.net\\3.4.1\\discord.net.3.4.1.nupkg.sha512",
     "C:\\Users\\bmaca\\.nuget\\packages\\discord.net.commands\\3.4.1\\discord.net.commands.3.4.1.nupkg.sha512",
