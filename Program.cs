@@ -1,17 +1,13 @@
 ﻿using Discord;
-using Discord.Net;
 using Discord.WebSocket;
-using Newtonsoft.Json;
-using System;
-using System.IO;
-using Bot;
+using Bot.Commands;
 
 namespace Bot
 {
     public class Program
     {
         public static DiscordSocketClient client = new DiscordSocketClient();
-        public static SocketGuild test_guild = client.GetGuild(780211278614364160);
+        private SlashCommandsRegister SlashRegister = new SlashCommandsRegister();
 
         public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -22,7 +18,7 @@ namespace Bot
             DotEnv.Load(dotenv);
 
             client.Log += Log;
-            
+
             var token = Environment.GetEnvironmentVariable("magnet-token");
 
             await client.LoginAsync(TokenType.Bot, token);
@@ -44,7 +40,8 @@ namespace Bot
         }
         public async Task Client_Ready()
         {
-            await test_guild.GetTextChannel(873389212857139223).SendMessageAsync(client.CurrentUser.Username + " is now online");
+            //Register Commands
+            await SlashRegister.SlashRegisterAsync(client);
         }
     }
 }
