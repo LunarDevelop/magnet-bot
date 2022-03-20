@@ -8,6 +8,7 @@ namespace Bot
     {
         public static DiscordSocketClient client = new DiscordSocketClient();
         private SlashCommandsRegister SlashRegister = new SlashCommandsRegister();
+        private SlashCommandsHandler SlashHandler = new SlashCommandsHandler(client);
 
         public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -25,6 +26,7 @@ namespace Bot
             await client.StartAsync();
 
             client.Ready += Client_Ready;
+            client.SlashCommandExecuted += SlashHandler.Handler;
 
             await client.SetStatusAsync(UserStatus.DoNotDisturb);
             await client.SetGameAsync("TESTING SYSTEMS");
@@ -40,6 +42,10 @@ namespace Bot
         }
         public async Task Client_Ready()
         {
+            // Removes all slash commands from my test server to ensure it all is current commands
+            await client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")))
+                        .DeleteApplicationCommandsAsync();
+                        
             //Register Commands
             await SlashRegister.SlashRegisterAsync(client);
         }
