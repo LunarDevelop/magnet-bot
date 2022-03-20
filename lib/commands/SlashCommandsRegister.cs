@@ -16,7 +16,12 @@ namespace Bot.Commands
             // Say Command
             SlashCommandBuilder SayCmd = new SlashCommandBuilder()
             .WithName("say")
-            .WithDescription("Get the" + client.CurrentUser.Username + "to say something in this channel.");
+            .WithDescription("Get " + client.CurrentUser.Username + " to say something in this channel.")
+            .AddOption(new SlashCommandOptionBuilder()
+                .WithName("message")
+                .WithDescription($"What do you want {client.CurrentUser.Username} to say")
+                .WithType(ApplicationCommandOptionType.String)
+                .WithRequired(true));
 
             CmdList.Add(SayCmd);
 
