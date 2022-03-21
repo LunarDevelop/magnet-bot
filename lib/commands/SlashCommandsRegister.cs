@@ -40,7 +40,12 @@ namespace Bot.Commands
                         .WithDescription("Remove a role from a user")
                         .WithType(ApplicationCommandOptionType.SubCommand)
                         .AddOption("user", ApplicationCommandOptionType.User, "The user you want to remove a role from", isRequired: true)
-                        .AddOption("role", ApplicationCommandOptionType.Role, "The role to remove", isRequired: true));
+                        .AddOption("role", ApplicationCommandOptionType.Role, "The role to remove", isRequired: true))
+                .AddOption(new SlashCommandOptionBuilder()
+                    .WithName("info")
+                    .WithDescription("Show some information about a role")
+                    .WithType(ApplicationCommandOptionType.SubCommand)
+                    .AddOption("role", ApplicationCommandOptionType.Role, "The role you would like information about", isRequired:true));
 
             CmdList.Add(RoleCmd);
 
