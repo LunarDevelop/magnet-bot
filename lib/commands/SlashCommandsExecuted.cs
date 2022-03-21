@@ -1,4 +1,5 @@
 using Discord.WebSocket;
+using Discord;
 
 namespace Bot.Commands
 {
@@ -30,23 +31,43 @@ namespace Bot.Commands
 
         public async Task RoleCmd(SocketSlashCommand cmd)
         {
+            SocketRole Role;
+            SocketGuildUser Usr;
+
             switch (cmd.Data.Options.First().Name)
             {
                 case "add":
-                    var AddUsr = (SocketGuildUser) cmd.Data.Options.First().Options.First().Value;
-                    var AddRole = (SocketRole)cmd.Data.Options.First().Options.Last().Value;
+                    Usr = (SocketGuildUser) cmd.Data.Options.First().Options.First().Value;
+                    Role = (SocketRole)cmd.Data.Options.First().Options.Last().Value;
 
-                    await AddUsr.AddRoleAsync(AddRole);
-                    await cmd.RespondAsync($"{AddRole.Mention} has been added to {AddUsr.Mention}");
+                    await Usr.AddRoleAsync(Role);
+                    await cmd.RespondAsync($"{Role.Mention} has been added to {Usr.Mention}");
                     break;
                 
                 case "remove":
-                    var RemoveUsr = (SocketGuildUser)cmd.Data.Options.First().Options.First().Value;
-                    var RemoveRole = (SocketRole)cmd.Data.Options.First().Options.Last().Value;
+                    Usr = (SocketGuildUser)cmd.Data.Options.First().Options.First().Value;
+                    Role = (SocketRole)cmd.Data.Options.First().Options.Last().Value;
 
-                    await RemoveUsr.RemoveRoleAsync(RemoveRole);
-                    await cmd.RespondAsync($"{RemoveRole.Mention} has been remove from {RemoveUsr.Mention}");
+                    await Usr.RemoveRoleAsync(Role);
+                    await cmd.RespondAsync($"{Role.Mention} has been remove from {Usr.Mention}");
                     break;
+                
+                case "info":
+                    Role = (SocketRole) cmd.Data.Options.First().Options.First().Value;
+                    var Embed = new EmbedBuilder()
+                        .WithTitle($"{Role.Name} Information")
+                        .AddField(new EmbedFieldBuilder()
+                            .WithName("User Count")
+                            .WithValue($"Count: {Role.Members.Count()}")
+                            .WithIsInline(true)
+                            )
+                        .AddField(new EmbedFieldBuilder()
+                            .WithName("ID")
+                            .WithValue(Role.Id)
+                            .WithIsInline(true));
+                    await cmd.RespondAsync(embed: Embed.Build());
+                    break;
+
             }
         }
     }
