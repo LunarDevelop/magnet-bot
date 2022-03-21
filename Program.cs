@@ -42,10 +42,23 @@ namespace Bot
         }
         public async Task Client_Ready()
         {
+            var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")));
+
             // Removes all slash commands from my test server to ensure it all is current commands
-            await client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")))
-                        .DeleteApplicationCommandsAsync();
-                        
+            await TestServer
+                .DeleteApplicationCommandsAsync();
+
+            //Alerts my test server that the bot is online
+            //TODO this will be changed to Lunar-dev notification channel once live
+            var LoadMsg = new EmbedBuilder()
+                    .WithTitle($"{client.CurrentUser.Username} loaded successfully")
+                    .WithColor(Color.DarkPurple)
+                    .WithCurrentTimestamp();
+
+            await TestServer.GetTextChannel(
+                Convert.ToUInt64(Environment.GetEnvironmentVariable("notification-channel")))
+                .SendMessageAsync(embed:LoadMsg.Build());
+
             //Register Commands
             await SlashRegister.SlashRegisterAsync(client);
         }
