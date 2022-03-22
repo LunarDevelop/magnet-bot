@@ -14,10 +14,13 @@ namespace Bot.Commands
 
         DiscordSocketClient client;
 
-        public async Task SlashRegisterAsync(DiscordSocketClient client)
+        public SlashCommandsRegister(DiscordSocketClient client)
         {
             this.client = client;
+        }
 
+        public async Task SlashRegisterAsync()
+        {
             // Say Command
             SlashCommandBuilder SayCmd = new SlashCommandBuilder()
             .WithName("say")
