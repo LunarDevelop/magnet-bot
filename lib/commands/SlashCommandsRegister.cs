@@ -7,11 +7,16 @@ namespace Bot.Commands
 {
     public class SlashCommandsRegister
     {
-        List<SlashCommandBuilder> CmdList = new List<SlashCommandBuilder>();
+        List<SlashCommandBuilder> TestCmdList = new List<SlashCommandBuilder>();
+        List<SlashCommandBuilder> GlobalCmdList = new List<SlashCommandBuilder>();
+        List<SlashCommandBuilder> LunarCmdList = new List<SlashCommandBuilder>();
+        List<SlashCommandBuilder> WaifuCmdList = new List<SlashCommandBuilder>();
 
+        DiscordSocketClient client;
 
         public async Task SlashRegisterAsync(DiscordSocketClient client)
         {
+            this.client = client;
 
             // Say Command
             SlashCommandBuilder SayCmd = new SlashCommandBuilder()
@@ -23,7 +28,7 @@ namespace Bot.Commands
                 .WithType(ApplicationCommandOptionType.String)
                 .WithRequired(true));
 
-            CmdList.Add(SayCmd);
+            GlobalCmdList.Add(SayCmd);
 
             // Role Commands
             SlashCommandBuilder RoleCmd = new SlashCommandBuilder()
@@ -47,17 +52,39 @@ namespace Bot.Commands
                     .WithType(ApplicationCommandOptionType.SubCommand)
                     .AddOption("role", ApplicationCommandOptionType.Role, "The role you would like information about", isRequired:true));
 
-            CmdList.Add(RoleCmd);
+            GlobalCmdList.Add(RoleCmd);
 
-            // Register Commands
+            await RegisterCmds();
+        }
+
+        private async Task RegisterCmds() {
             try
             {
-                // Now that we have our builder, we can call the CreateApplicationCommandAsync method to make our slash command.
-                foreach (SlashCommandBuilder cmd in CmdList)
+                // Build the global commands
+                foreach (SlashCommandBuilder cmd in GlobalCmdList)
                 {
-                    await client.GetGuild(
-                        Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")))
-                        .CreateApplicationCommandAsync(cmd.Build());
+                    await client.CreateGlobalApplicationCommandAsync(cmd.Build());
+                }
+
+                // Build the test server commands
+                var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-server")));
+                foreach (SlashCommandBuilder cmd in TestCmdList)
+                {
+                    await TestServer.CreateApplicationCommandAsync(cmd.Build());
+                }
+
+                // Build the Lunar server commands
+                var LunarServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("lunar-server")));
+                foreach (SlashCommandBuilder cmd in TestCmdList)
+                {
+                    await LunarServer.CreateApplicationCommandAsync(cmd.Build());
+                }
+
+                // Build the Waifu server commands
+                var WaifuServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("waifu-server")));
+                foreach (SlashCommandBuilder cmd in TestCmdList)
+                {
+                    await WaifuServer.CreateApplicationCommandAsync(cmd.Build());
                 }
 
             }
