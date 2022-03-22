@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CODE\\magnet-bot\\magnet-bot.csproj": {}
+    "F:\\C#\\discord\\magnet\\Commands\\magnet-bot.csproj": {}
   },
   "projects": {
-    "D:\\CODE\\magnet-bot\\magnet-bot.csproj": {
+    "F:\\C#\\discord\\magnet\\Commands\\magnet-bot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CODE\\magnet-bot\\magnet-bot.csproj",
+        "projectUniqueName": "F:\\C#\\discord\\magnet\\Commands\\magnet-bot.csproj",
         "projectName": "magnet-bot",
-        "projectPath": "D:\\CODE\\magnet-bot\\magnet-bot.csproj",
+        "projectPath": "F:\\C#\\discord\\magnet\\Commands\\magnet-bot.csproj",
         "packagesPath": "C:\\Users\\bmaca\\.nuget\\packages\\",
-        "outputPath": "D:\\CODE\\magnet-bot\\obj\\",
+        "outputPath": "F:\\C#\\discord\\magnet\\Commands\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bmaca\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\bmaca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +43,10 @@
             "Discord.Net": {
               "target": "Package",
               "version": "[3.4.1, )"
+            },
+            "Nekos-Sharp": {
+              "target": "Package",
+              "version": "[3.5.0, )"
             }
           },
           "imports": [
@@ -58,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

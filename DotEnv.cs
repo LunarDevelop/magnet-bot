@@ -1,4 +1,4 @@
-namespace sancus
+namespace Bot
 {
     using System;
     using System.IO;
