@@ -104,6 +104,18 @@
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
         }
       },
+      "Nekos-Sharp/3.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Nekos-Sharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Nekos-Sharp.dll": {}
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -322,6 +334,18 @@
         "version.txt"
       ]
     },
+    "Nekos-Sharp/3.5.0": {
+      "sha512": "uEGFaf3kPCni+Rxs0P2ycyNjVcIjaiYWuwoim40p5pPyQEh+YlV4q9e3BYo9BAgxLdT7VRBMvASxw49BUmv+SA==",
+      "type": "package",
+      "path": "nekos-sharp/3.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Nekos-Sharp.dll",
+        "nekos-sharp.3.5.0.nupkg.sha512",
+        "nekos-sharp.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.1": {
       "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
@@ -497,7 +521,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Discord.Net >= 3.4.1"
+      "Discord.Net >= 3.4.1",
+      "Nekos-Sharp >= 3.5.0"
     ]
   },
   "packageFolders": {
@@ -542,6 +567,10 @@
           "Discord.Net": {
             "target": "Package",
             "version": "[3.4.1, )"
+          },
+          "Nekos-Sharp": {
+            "target": "Package",
+            "version": "[3.5.0, )"
           }
         },
         "imports": [

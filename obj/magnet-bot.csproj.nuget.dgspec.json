@@ -43,6 +43,10 @@
             "Discord.Net": {
               "target": "Package",
               "version": "[3.4.1, )"
+            },
+            "Nekos-Sharp": {
+              "target": "Package",
+              "version": "[3.5.0, )"
             }
           },
           "imports": [

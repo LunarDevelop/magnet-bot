@@ -52,3 +52,4 @@ F:\C#\discord\magnet\Commands\obj\Debug\net6.0\refint\magnet-bot.dll
 F:\C#\discord\magnet\Commands\obj\Debug\net6.0\magnet-bot.pdb
 F:\C#\discord\magnet\Commands\obj\Debug\net6.0\magnet-bot.genruntimeconfig.cache
 F:\C#\discord\magnet\Commands\obj\Debug\net6.0\ref\magnet-bot.dll
+F:\C#\discord\magnet\Commands\bin\Debug\net6.0\Nekos-Sharp.dll
