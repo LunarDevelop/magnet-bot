@@ -7,7 +7,7 @@ namespace Bot
     public class Program
     {
         public static DiscordSocketClient client = new DiscordSocketClient();
-        private SlashCommandsRegister SlashRegister = new SlashCommandsRegister();
+        private SlashCommandsRegister SlashRegister = new SlashCommandsRegister(client);
         private SlashCommandsHandler SlashHandler = new SlashCommandsHandler(client);
 
         public static Task Main(string[] args) => new Program().MainAsync();
@@ -60,7 +60,7 @@ namespace Bot
                 .SendMessageAsync(embed:LoadMsg.Build());
 
             //Register Commands
-            await SlashRegister.SlashRegisterAsync(client);
+            await SlashRegister.SlashRegisterAsync();
         }
     }
 }
