@@ -57,7 +57,27 @@ namespace Bot.Commands
 
             GlobalCmdList.Add(RoleCmd);
 
+            // Execute the guild commands
+            RegisterLunarCmds();
+            RegisterWaifuCmds();
+
             await RegisterCmds();
+        }
+
+        private void RegisterLunarCmds()
+        {
+            
+        }
+
+        private void RegisterWaifuCmds() 
+        {
+            SlashCommandBuilder NekoCmd = new SlashCommandBuilder()
+                .WithName("neko")
+                .WithDescription("Get some Neko images from nekos.life api")
+                .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("neko")
+                        .WithDescription("Random neko image")
+                        .WithType(ApplicationCommandOptionType.SubCommand));
         }
 
         private async Task RegisterCmds() {
