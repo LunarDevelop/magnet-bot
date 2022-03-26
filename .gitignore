@@ -53,3 +53,8 @@ dkms.conf
 
 .env
 .vscode/**
+.vs/**
+obj/**
+bin/**
+**.sln
+**.json
