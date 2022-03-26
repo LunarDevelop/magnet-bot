@@ -12,7 +12,6 @@ namespace Bot
 
             foreach (var line in File.ReadAllLines(filePath))
             {
-                Console.WriteLine("LINEs "+line);
                 var parts = line.Split(
                     '=',
                     StringSplitOptions.RemoveEmptyEntries);
