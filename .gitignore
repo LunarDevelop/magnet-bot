@@ -58,3 +58,4 @@ obj/**
 bin/**
 **.sln
 **.json
+**.user
