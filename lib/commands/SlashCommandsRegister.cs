@@ -89,7 +89,7 @@ namespace Bot.Commands
                         .AddOption(new SlashCommandOptionBuilder()
                             .WithName("8ball")
                             .WithDescription("Get an 8ball image")
-                            .WithType(ApplicationCommandOptionType.SubCommand)))
+                            .WithType(ApplicationCommandOptionType.SubCommand)));
                 
             WaifuCmdList.Add(NekoCmd);
         }
