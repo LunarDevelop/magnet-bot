@@ -77,7 +77,21 @@ namespace Bot.Commands
                 .AddOption(new SlashCommandOptionBuilder()
                         .WithName("neko")
                         .WithDescription("Random neko image")
-                        .WithType(ApplicationCommandOptionType.SubCommand));
+                        .WithType(ApplicationCommandOptionType.SubCommand))
+                .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("misc")
+                        .WithDescription("Some Misc Image Types")
+                        .WithType(ApplicationCommandOptionType.SubCommandGroup)
+                        .AddOption(new SlashCommandOptionBuilder()
+                            .WithName("cat")
+                            .WithDescription("A cute cat image")
+                            .WithType(ApplicationCommandOptionType.SubCommand))
+                        .AddOption(new SlashCommandOptionBuilder()
+                            .WithName("8ball")
+                            .WithDescription("Get an 8ball image")
+                            .WithType(ApplicationCommandOptionType.SubCommand)));
+                
+            WaifuCmdList.Add(NekoCmd);
         }
 
         private async Task RegisterCmds() {
@@ -90,22 +104,22 @@ namespace Bot.Commands
                 }
 
                 // Build the test server commands
-                var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-server")));
+                var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")));
                 foreach (SlashCommandBuilder cmd in TestCmdList)
                 {
                     await TestServer.CreateApplicationCommandAsync(cmd.Build());
                 }
 
                 // Build the Lunar server commands
-                var LunarServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("lunar-server")));
-                foreach (SlashCommandBuilder cmd in TestCmdList)
+                var LunarServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("lunar-guild")));
+                foreach (SlashCommandBuilder cmd in LunarCmdList)
                 {
                     await LunarServer.CreateApplicationCommandAsync(cmd.Build());
                 }
 
                 // Build the Waifu server commands
-                var WaifuServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("waifu-server")));
-                foreach (SlashCommandBuilder cmd in TestCmdList)
+                var WaifuServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("waifu-guild")));
+                foreach (SlashCommandBuilder cmd in WaifuCmdList)
                 {
                     await WaifuServer.CreateApplicationCommandAsync(cmd.Build());
                 }

@@ -28,8 +28,8 @@ namespace Bot
             client.Ready += Client_Ready;
             client.SlashCommandExecuted += SlashHandler.Handler;
 
-            await client.SetStatusAsync(UserStatus.DoNotDisturb);
-            await client.SetGameAsync("TESTING SYSTEMS");
+            await client.SetStatusAsync(UserStatus.Online);
+            await client.SetGameAsync(Environment.GetEnvironmentVariable("status-message"));
 
             // Block this task until the program is closed.
             await Task.Delay(-1);
