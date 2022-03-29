@@ -90,31 +90,7 @@ namespace Bot.Commands
                             .WithName("8ball")
                             .WithDescription("Get an 8ball image")
                             .WithType(ApplicationCommandOptionType.SubCommand)))
-                .AddOption(new SlashCommandOptionBuilder()
-                        .WithName("nsfw")
-                        .WithDescription("Some Misc Image Types")
-                        .WithType(ApplicationCommandOptionType.SubCommandGroup)
-                        .AddChannelType(ChannelType.Text)
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("pussy")
-                            .WithDescription("NSFW Command")
-                            .WithType(ApplicationCommandOptionType.SubCommand))
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("cum")
-                            .WithDescription("NSFW Command")
-                            .WithType(ApplicationCommandOptionType.SubCommand))
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("bdsm")
-                            .WithDescription("NSFW Command")
-                            .WithType(ApplicationCommandOptionType.SubCommand))
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("gif-spank")
-                            .WithDescription("NSFW Command")
-                            .WithType(ApplicationCommandOptionType.SubCommand))
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("ero-neko")
-                            .WithDescription("NSFW Command")
-                            .WithType(ApplicationCommandOptionType.SubCommand)));
+                
             WaifuCmdList.Add(NekoCmd);
         }
 

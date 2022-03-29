@@ -121,56 +121,7 @@ namespace Bot.Commands
 
                     }
                     break;
-
-                case "nsfw":
-                    SocketTextChannel channel = (SocketTextChannel) client.GetChannel(cmd.Channel.Id);
-                    if (!channel.IsNsfw)
-                    {
-                        await cmd.RespondAsync("This is not an NSFW channel, please try there first!", ephemeral:true);
-                        return;
-                    };
-
-                    switch (cmd.Data.Options.First().Options.First().Name)
-                    {
-                        case "pussy":
-                            req = await NekoClient.Nsfw_v3.Pussy();
-                            embed = new EmbedBuilder()
-                                .WithImageUrl(req.ImageUrl);
-
-                            await cmd.RespondAsync(embed: embed.Build());
-                            break;
-                        case "cum":
-                            req = await NekoClient.Nsfw_v3.Cum();
-                            embed = new EmbedBuilder()
-                                .WithImageUrl(req.ImageUrl);
-
-                            await cmd.RespondAsync(embed: embed.Build());
-                            break;
-                        case "bdsm":
-                            req = await NekoClient.Nsfw_v3.Bdsm();
-                            embed = new EmbedBuilder()
-                                .WithImageUrl(req.ImageUrl);
-
-                            await cmd.RespondAsync(embed: embed.Build());
-                            break;
-                        case "gif-spank":
-                            req = await NekoClient.Nsfw_v3.SpankGif();
-                            embed = new EmbedBuilder()
-                                .WithImageUrl(req.ImageUrl);
-
-                            await cmd.RespondAsync(embed: embed.Build());
-                            break;
-                        case "ero-neko":
-                            req = await NekoClient.Nsfw_v3.EroNeko();
-                            embed = new EmbedBuilder()
-                                .WithImageUrl(req.ImageUrl);
-
-                            await cmd.RespondAsync(embed: embed.Build());
-                            break;
-                    }
-                    break;
             }
-
         }
     }
 
