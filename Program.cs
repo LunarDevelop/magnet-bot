@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using Bot.Commands;
+using MySql.Data.MySqlClient;
 
 namespace Bot
 {
@@ -9,6 +10,8 @@ namespace Bot
         public static DiscordSocketClient client = new DiscordSocketClient();
         private SlashCommandsRegister SlashRegister = new SlashCommandsRegister(client);
         private SlashCommandsHandler SlashHandler = new SlashCommandsHandler(client);
+
+        public DBConnection dBConnection;
 
         public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -31,6 +34,8 @@ namespace Bot
             await client.SetStatusAsync(UserStatus.Online);
             await client.SetGameAsync(Environment.GetEnvironmentVariable("status-message"));
 
+            dBConnection = new DBConnection();
+
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
@@ -42,25 +47,47 @@ namespace Bot
         }
         public async Task Client_Ready()
         {
-            var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")));
+            try 
+            { 
+                var TestServer = client.GetGuild(Convert.ToUInt64(Environment.GetEnvironmentVariable("test-guild")));
 
-            // Removes all slash commands from my test server to ensure it all is current commands
-            await TestServer
-                .DeleteApplicationCommandsAsync();
+                // Removes all slash commands from my test server to ensure it all is current commands
+                await TestServer
+                    .DeleteApplicationCommandsAsync();
 
-            //Alerts my test server that the bot is online
-            //TODO this will be changed to Lunar-dev notification channel once live
-            var LoadMsg = new EmbedBuilder()
-                    .WithTitle($"{client.CurrentUser.Username} loaded successfully")
-                    .WithColor(Color.DarkPurple)
-                    .WithCurrentTimestamp();
+                //Alerts my test server that the bot is online
+                //TODO this will be changed to Lunar-dev notification channel once live
+                var LoadMsg = new EmbedBuilder()
+                        .WithTitle($"{client.CurrentUser.Username} loaded successfully")
+                        .WithColor(Color.DarkPurple)
+                        .WithCurrentTimestamp();
 
-            await TestServer.GetTextChannel(
-                Convert.ToUInt64(Environment.GetEnvironmentVariable("notification-channel")))
-                .SendMessageAsync(embed:LoadMsg.Build());
+                await TestServer.GetTextChannel(
+                    Convert.ToUInt64(Environment.GetEnvironmentVariable("notification-channel")))
+                    .SendMessageAsync(embed: LoadMsg.Build());
 
-            //Register Commands
-            await SlashRegister.SlashRegisterAsync();
+                //Register Commands
+                await SlashRegister.SlashRegisterAsync(); 
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.ToString());
+            }
+
+            try
+            {
+
+                dBConnection.OpenConnection();
+
+                MySqlDataReader result = dBConnection.SelectQueryExecutor("*", "new_table", null);
+
+                while (result.Read())
+                {
+                    Console.WriteLine(result.GetString(1));
+                }
+                dBConnection.CloseConnection();
+            }
+            catch (Exception ex) { Console.Error.WriteLine(ex.ToString()); }
         }
     }
 }
